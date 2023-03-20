@@ -9,7 +9,7 @@ Simple python frame viewer
 
 ### WIP feature list:
  - Zoom in (enough) shows the intensities for all pixel above the current threshold (slider)
- - the 'a' button toggles summation mode (don't clear canvas after image change, add instead)
+ - the 'a' button toggles summation mode (changing the image doesn't clear canvas)
  
 ### WIP bug list:
  - histogram bugged when changing to first/last image (because of hacky slider implementation, tbf!)
