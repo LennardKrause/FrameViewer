@@ -1,11 +1,11 @@
 # FrameViewer
 Simple python frame viewer
 
-### It currently understands:
+### Currently understands:
  - .tif (Dectris Pilatus3)
  - .sfrm (Bruker)
 
-### Uses numpy to do the math and pyqtgraph do display the image.
+### Uses numpy to do the math, pyqtgraph do display the image and python to hold it all together.
 
 ### WIP feature list:
  - Zoom in (enough) shows the intensities for all pixel above the current threshold (slider)
