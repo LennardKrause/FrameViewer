@@ -57,6 +57,14 @@ def read_image(fname):
         print('Image format not supported!')
         raise SystemExit
 
+def read_Rayonix(fname):
+    with open(fname, 'rb') as b:
+        # we are not interested in the header
+        #head = b.read(4096).decode('unicode_escape')
+        b.seek(4096)
+        data = np.ndarray(shape=(1920, 1920), dtype=np.int16, buffer=b.read())
+    return data
+
 def read_Pilatus3X1M(fname):
     with open(fname, 'rb') as b:
         # we are not interested in the header
@@ -226,7 +234,7 @@ def main():
     app = pg.mkQApp()
 
     #_ARGS = init_parser()
-    img_path = pg.FileDialog.getOpenFileName(None, 'Open file', '/Users/au577597/Library/CloudStorage/OneDrive-Aarhusuniversitet/Github/FrameWatcher/sfrm/', "Image files (*.tif *.sfrm)")[0]
+    img_path = pg.FileDialog.getOpenFileName(None, 'Open file', '/Users/au577597/Library/CloudStorage/OneDrive-Aarhusuniversitet/Github/FrameWatcher/sfrm/', "Image files (*.img *.sfrm *.tif)")[0]
     #img_path = pg.FileDialog.getOpenFileName(None, 'Open file', "Image files (*.tif *.sfrm)")[0]
     #img_path = '/Users/au577597/Library/CloudStorage/OneDrive-Aarhusuniversitet/Github/FrameWatcher/sfrm/Rubrene_21_data_00_0001.sfrm'
 
@@ -236,7 +244,8 @@ def main():
     par.imgs = sorted(glob.glob(os.path.join(par.path, f'*{par.fext}')))
     par.nimg = len(par.imgs)
     par.fmts = {'.sfrm':read_sfrm,
-                 '.tif':read_Pilatus3X1M}
+                 '.tif':read_Pilatus3X1M,
+                 '.img':read_Rayonix}
     par.temp = read_image(img_path)
     par.dshp = par.temp.shape
     par.isum = False
